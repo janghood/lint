@@ -5,6 +5,11 @@
   "author": "阿怪 <higuaifan@higuaifan.com>",
   "main": "index.js",
   "type": "module",
+  "files": [
+    "config",
+    "lib",
+    "dist"
+  ],
   "scripts": {
     "prepare": "husky install",
     "run": "tsx lib/bin/jhlint.ts",
