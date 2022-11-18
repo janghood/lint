@@ -7,19 +7,38 @@
  * 江湖的业务千篇一律，复杂的代码好几百行。
  */
 import { initConfig } from '@janghood/config';
-import { callEslint } from './dependence/callEslint';
+import { Chalk } from 'chalk';
+import { run } from './channel/run';
+import { install } from './channel/install';
 
-const run = async () => {
+const error = new Chalk().hex('#861717');
+
+
+const jhlint = async () => {
+
   const janghoodConfig = await initConfig();
-
-  if (janghoodConfig && janghoodConfig.lint) {
-
-    const { lint } = janghoodConfig;
-    if (lint.eslint) {
-      await callEslint(lint.eslint);
-    }
-
+  if (!janghoodConfig || !janghoodConfig.lint) {
+    console.log(error('Janghood config is not found, please check your config file.'));
+    return;
   }
+  const { lint } = janghoodConfig;
+  const { argv } = process;
+  if (argv.length < 2) {
+    await run(lint);
+    return;
+  }
+
+  const type = argv[2];
+  if (type === 'install') {
+    await install(lint);
+    return;
+  }
+
+  await run(lint);
+
 };
 
-run();
+jhlint();
+
+
+

@@ -16,5 +16,6 @@ export default defineJhConfig({
   },
   lint: {
     eslint: true,
+    commitlint: true
   }
 });
