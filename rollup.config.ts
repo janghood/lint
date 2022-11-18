@@ -8,6 +8,8 @@
  */
 import typescript from '@rollup/plugin-typescript';
 import json from '@rollup/plugin-json';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 
 const buildBaseConfig = {
@@ -36,9 +38,20 @@ export default [
   {
     ...buildBaseConfig,
     input: 'lib/bin/jhlint.ts',
+    output: [{ file: 'output/bin/jhlint-prev.js' }],
+  },
+  {
+    ...buildBaseConfig,
+    input: 'output/bin/jhlint-prev.js',
     output: [{
       sourcemap: true,
-      file: 'dist/bin/jhlint.js',
-    }]
+      file: 'dist/bin/jhlint.js'
+    }],
+    external: ['eslint'],
+    plugins: [
+      nodeResolve(),
+      commonjs(),
+      json()
+    ]
   }
 ];
