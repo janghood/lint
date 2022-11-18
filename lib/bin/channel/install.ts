@@ -35,6 +35,7 @@ const prepare = () => {
 };
 
 export const install = async (lint: LintType) => {
+  log('installing commitlint git hook...');
   if (!lint.commitlint) {return;}
   if (!prepare()) {return;}
 
@@ -42,9 +43,9 @@ export const install = async (lint: LintType) => {
     fs.writeFileSync(p.join(dir, 'commit-msg'), commitMsg);
     fs.chmodSync(p.join(dir, 'commit-msg'), 0o755);
   } catch (e) {
-    error('install commitlint failed');
+    error('install failed');
     throw e;
   }
 
-  success('install commitlint success');
+  success('install success');
 };
