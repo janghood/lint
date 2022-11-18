@@ -15,10 +15,12 @@ const eslintConfig: Linter.Config = {
     node: true
   },
   extends: ['eslint:recommended', 'plugin:vue/vue3-essential', 'plugin:@typescript-eslint/recommended'],
-  parser: '@typescript-eslint/parser',
+  parser: 'vue-eslint-parser',
   parserOptions: {
+    parser: '@typescript-eslint/parser',
     ecmaVersion: 'latest',
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaFeatures:{ jsx: true }
   },
   plugins: ['vue', '@typescript-eslint'],
   ignorePatterns: ['node_modules/*', 'dist', 'coverage', '**/_types/*.d.ts'],
@@ -27,7 +29,9 @@ const eslintConfig: Linter.Config = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-empty-function': [2, { allow: ['arrowFunctions'] }],
     '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/member-delimiter-style': [2, { multiline: { delimiter: 'comma', requireLast: false } }]
+    '@typescript-eslint/member-delimiter-style': [2, { multiline: { delimiter: 'comma', requireLast: false } }],
+    'vue/multi-word-component-names': 'off',
+    'vue/valid-v-for': 'off',
   }
 };
 
