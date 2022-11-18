@@ -1,6 +1,6 @@
 {
   "name": "@janghood/lint",
-  "version": "0.0.1-0",
+  "version": "0.0.1-1",
   "description": "极客江湖lint库",
   "author": "阿怪 <higuaifan@higuaifan.com>",
   "main": "index.js",
@@ -13,7 +13,7 @@
   "scripts": {
     "prepare": "husky install",
     "run": "tsx lib/bin/jhlint.ts",
-    "install": "tsx lib/bin/jhlint.ts install",
+    "dev-install": "tsx lib/bin/jhlint.ts install",
     "rm-dist": "rm -rf dist",
     "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "eslint": "eslint --config dist/eslint.js ."
