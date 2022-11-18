@@ -7,26 +7,26 @@
  *
  * 江湖的业务千篇一律，复杂的代码好几百行。
  */
-import { Chalk } from 'chalk';
+import * as chalk from 'chalk';
 
-export const chalk = new Chalk({ level: 3 });
+export const c = new chalk.Chalk({ level: 3 });
 
 export const log = (info:string)=>{
-  console.log(chalk.hex('#74787A')(info));
+  console.log(c.hex('#74787A')(info));
 }
 export const success = (info:string)=>{
-  console.log(chalk.hex('#4A9992')(info));
+  console.log(c.hex('#4A9992')(info));
 }
 export const error = (info:string)=>{
-  console.log(chalk.hex('#861717')(info));
+  console.log(c.hex('#861717')(info));
 }
 export const warn = (info:string)=>{
-  console.log(chalk.hex('#E8B004')(info));
+  console.log(c.hex('#E8B004')(info));
 }
 
 
 
 
 export const eslintLog = (info: string) => {
-  console.log(chalk.hex('#4B32C3')(info));
+  console.log(c.hex('#4B32C3')(info));
 };

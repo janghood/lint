@@ -7,18 +7,17 @@
  * 江湖的业务千篇一律，复杂的代码好几百行。
  */
 import { initConfig } from '@janghood/config';
-import { Chalk } from 'chalk';
 import { run } from './channel/run';
 import { install } from './channel/install';
+import { error } from './dependence/tools';
 
-const error = new Chalk().hex('#861717');
 
 
 const jhlint = async () => {
 
   const janghoodConfig = await initConfig();
   if (!janghoodConfig || !janghoodConfig.lint) {
-    console.log(error('Janghood config is not found, please check your config file.'));
+    error('Janghood config is not found, please check your config file.')
     return;
   }
   const { lint } = janghoodConfig;

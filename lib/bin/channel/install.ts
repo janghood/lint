@@ -10,7 +10,7 @@ import { LintType } from '@janghood/config';
 import husky from 'husky';
 import p from 'path';
 import fs from 'fs';
-import { error, success } from '../dependence/tools';
+import { error, log, success } from '../dependence/tools';
 
 const commitMsg = `#!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
