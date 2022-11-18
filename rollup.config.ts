@@ -29,7 +29,7 @@ export default [
     input: 'config/commitlint.config.ts',
     output: [{
       sourcemap: true,
-      file: 'dist/commitlint.js',
+      file: 'dist/commitlint.cjs',
       format: 'cjs'
     }]
   },
@@ -39,7 +39,6 @@ export default [
     output: [{
       sourcemap: true,
       file: 'dist/bin/jhlint.js',
-      format: 'cjs',
-    }],
+    }]
   }
 ];
