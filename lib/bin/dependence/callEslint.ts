@@ -12,21 +12,23 @@ import eslintConfig from '../../../config/eslint.config';
 import chalk from 'chalk';
 import table from 'text-table';
 import stripAnsi from 'strip-ansi';
-import { easyClone } from '../../../../config/lib/init/tools';
+import { error, eslintLog, log, success } from './tools';
+
 
 const pwd = process.cwd();
 
+
 const resultsFormatter = (result: ESLint.LintResult) => {
-  let summaryColor = 'yellow';
-  const output = `${table(
+  let summaryColor = '#E8B004';
+  return `${table(
     result.messages.map(message => {
       let messageType;
 
       if (message.fatal || message.severity === 2) {
-        messageType = chalk.red('error');
-        summaryColor = 'red';
+        messageType = chalk.hex('#861717')('error');
+        summaryColor = '#861717';
       } else {
-        messageType = chalk.yellow('warning');
+        messageType = chalk.hex('#E8B004')('warning');
       }
 
       return [
@@ -53,42 +55,43 @@ const resultsFormatter = (result: ESLint.LintResult) => {
     )
     .join('\n')
   }`;
-
-  console.log(output);
-
-};
-
-
-const eslintChalk = chalk.hex('#4B32C3');
-const log = (info: string) => {
-  console.log(eslintChalk(info));
 };
 
 export const callEslint = async (config?: EslintOption) => {
 
-  log('====== 👮 eslint start ======');
+  eslintLog('====== 👮 eslint start ======');
 
-  const baseConfig = easyClone(eslintConfig);
+  const baseConfig = Object.assign({}, eslintConfig);
 
-  if (config && config.exclude) {baseConfig.ignorePatterns.push(...config.exclude);}
+  if (config && config.exclude) {(baseConfig.ignorePatterns as string[]).push(...config.exclude);}
 
   const eslint = new ESLint({ baseConfig });
   const lintResults = await eslint.lintFiles(config && config.include ? config.include : '.');
+
+  let resultMsg = '';
+  let pass = 0, fail = 0;
 
   lintResults.forEach(result => {
     const filePath = result.filePath.split(pwd)[1];
 
     if (result.messages.length === 0) {
-      console.log(`✅ ${filePath} lint success`);
+      pass++;
+      resultMsg += `✅ ${filePath} lint success\n`;
       return;
     }
-
-    console.group(`❌ ${filePath} lint fail`);
-    resultsFormatter(result);
-
-
-    console.groupEnd();
+    fail++;
+    resultMsg += `❌ ${filePath} lint fail\n`;
+    resultMsg += resultsFormatter(result);
+    resultMsg += '\n\n';
   });
 
-  log('====== 👮 eslint end ======');
+  if (fail === 0) {
+    success('🎉 eslint all pass');
+  } else {
+    console.log(resultMsg + '\n');
+    log(`🚨 eslint pass ${pass} file(s), fail ${fail} file(s)`);
+  }
+
+
+  eslintLog('====== 👮 eslint end ======');
 };
