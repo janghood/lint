@@ -11,12 +11,13 @@ dependence on `eslint` and `commitlint`+`husky`.
 ### Usage
 
 You should install dependency first.
-
-#### Eslint
+So when you use `@janghood/lint`:
 
 ```bash
-pnpm add -D eslint eslint-plugin-vue @typescript-eslint/eslint-plugin @typescript-eslint/parser
+pnpm install --shamefully-hoist
 ```
+
+#### Eslint
 
 ```typescript
 // janghood.config.ts
@@ -31,10 +32,6 @@ export default defineJhConfig({
 ```
 
 #### Commitlint
-
-```bash
-pnpm add -D husky @commitlint/cli
-```
 
 In `package.json`:
 

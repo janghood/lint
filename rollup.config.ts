@@ -11,10 +11,10 @@ import json from '@rollup/plugin-json';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
-
 const buildBaseConfig = {
   plugins: [typescript(), json()]
 };
+
 
 export default [
   {
@@ -36,22 +36,18 @@ export default [
     }]
   },
   {
-    ...buildBaseConfig,
     input: 'lib/bin/jhlint.ts',
-    output: [{ file: 'output/bin/jhlint-prev.js' }],
-  },
-  {
-    ...buildBaseConfig,
-    input: 'output/bin/jhlint-prev.js',
     output: [{
       sourcemap: true,
-      file: 'dist/bin/jhlint.js'
+      file: 'dist/bin/jhlint.mjs'
     }],
-    external: ['eslint'],
+    external: [
+      'eslint', 'chalk', 'husky',
+      '@janghood/config',
+      'fs', 'path', 'child_process'
+    ],
     plugins: [
-      nodeResolve(),
-      commonjs(),
-      json()
+      typescript(), json(), nodeResolve(), commonjs()
     ]
   }
 ];

@@ -1,6 +1,6 @@
 {
   "name": "@janghood/lint",
-  "version": "0.0.1-4",
+  "version": "0.0.1-5",
   "description": "极客江湖lint库",
   "author": "阿怪 <higuaifan@higuaifan.com>",
   "main": "index.js",
@@ -13,13 +13,14 @@
   "scripts": {
     "prepare": "husky install",
     "run": "tsx lib/bin/jhlint.ts",
-    "dev-install": "tsx lib/bin/jhlint.ts install",
+    "run-install": "tsx lib/bin/jhlint.ts install",
+    "dist-dev": "npm run build && node dist/bin/jhlint.mjs install",
     "rm-dist": "rm -rf dist",
     "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "eslint": "eslint --config dist/eslint.js ."
   },
   "bin": {
-    "jhlint": "dist/bin/jhlint.js"
+    "jhlint": "dist/bin/jhlint.mjs"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,11 @@
     "eslint"
   ],
   "license": "MIT",
+  "peerDependencies": {
+    "eslint": "^8.27.0",
+    "husky": "^8.0.2",
+    "chalk": "^5.1.2"
+  },
   "devDependencies": {
     "@commitlint/types": "^17.0.0",
     "@rollup/plugin-commonjs": "^23.0.2",

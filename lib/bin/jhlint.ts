@@ -17,7 +17,7 @@ const jhlint = async () => {
 
   const janghoodConfig = await initConfig();
   if (!janghoodConfig || !janghoodConfig.lint) {
-    error('Janghood config is not found, please check your config file.')
+    error('Janghood config is not found, please check your config file.');
     return;
   }
   const { lint } = janghoodConfig;

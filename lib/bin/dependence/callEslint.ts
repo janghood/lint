@@ -9,10 +9,9 @@
 import { EslintOption } from '@janghood/config';
 import { ESLint } from 'eslint';
 import eslintConfig from '../../../config/eslint.config';
-import chalk from 'chalk';
 import table from 'text-table';
 import stripAnsi from 'strip-ansi';
-import { error, eslintLog, log, success } from './tools';
+import { c, error, eslintLog, log, success } from './tools';
 
 
 const pwd = process.cwd();
@@ -25,10 +24,10 @@ const resultsFormatter = (result: ESLint.LintResult) => {
       let messageType;
 
       if (message.fatal || message.severity === 2) {
-        messageType = chalk.hex('#861717')('error');
+        messageType = c.hex('#861717')('error');
         summaryColor = '#861717';
       } else {
-        messageType = chalk.hex('#E8B004')('warning');
+        messageType = c.hex('#E8B004')('warning');
       }
 
       return [
@@ -37,7 +36,7 @@ const resultsFormatter = (result: ESLint.LintResult) => {
         message.column || 0,
         messageType,
         message.message.replace(/([^ ])\.$/u, '$1'),
-        chalk.dim(message.ruleId || '')
+        c.dim(message.ruleId || '')
       ];
     }),
     {
@@ -50,7 +49,7 @@ const resultsFormatter = (result: ESLint.LintResult) => {
     .map(el => el.replace(
         /(\d+)\s+(\d+)/u,
         // todo ?? why eslint can print number and have clickable link?
-        (m, p1, p2) => chalk.dim(`${result.filePath.split(pwd)[1]}:${p1}:${p2}`)
+        (m, p1, p2) => c.dim(`${result.filePath.split(pwd)[1]}:${p1}:${p2}`)
       )
     )
     .join('\n')

@@ -7,9 +7,9 @@
  *
  * 江湖的业务千篇一律，复杂的代码好几百行。
  */
-import * as chalk from 'chalk';
+import { Chalk } from 'chalk';
 
-export const c = new chalk.Chalk({ level: 3 });
+export const c = new Chalk({ level: 3 });
 
 export const log = (info:string)=>{
   console.log(c.hex('#74787A')(info));
