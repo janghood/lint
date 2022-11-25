@@ -18,7 +18,8 @@
     "rm-dist": "rm -rf dist",
     "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "eslint": "eslint --config dist/eslint.js .",
-    "test": "vitest -u"
+    "test": "vitest -u",
+    "lint": "jhlint"
   },
   "bin": {
     "jhlint": "dist/bin/jhlint.mjs"

@@ -14,14 +14,12 @@ import stripAnsi from 'strip-ansi';
 const pwd = process.cwd();
 
 export const resultsFormatter = (result: ESLint.LintResult) => {
-  let summaryColor = '#E8B004';
   return `${table(
     result.messages.map(message => {
       let messageType;
 
       if (message.fatal || message.severity === 2) {
         messageType = c.hex('#861717')('error');
-        summaryColor = '#861717';
       } else {
         messageType = c.hex('#E8B004')('warning');
       }
