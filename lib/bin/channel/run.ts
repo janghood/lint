@@ -9,7 +9,7 @@
  * only support eslint right now.
  */
 import { LintType } from '@janghood/config';
-import { callEslint } from '../dependence/callEslint';
+import { callEslint } from '../dependence/eslint/callEslint';
 
 
 export const run = async (lint: LintType) => {
