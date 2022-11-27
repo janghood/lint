@@ -10,34 +10,35 @@ import { initConfig } from '@janghood/config';
 import { run } from './channel/run';
 import { install } from './channel/install';
 import { error } from './dependence/tools';
+import { cac } from 'cac';
 
+const cli = cac('jhlint');
 
+cli.command('[type]', 'start lint')
+  .option('--config, -c <path>', 'config file path')
+  .action(async (type, options) => {
 
-const jhlint = async () => {
+    const { config } = options;
+    const inlineConfig = {};
+    if (config) {
+      // todo get config info
+    }
+    const janghoodConfig = await initConfig(Object.keys(inlineConfig).length > 0 ? inlineConfig : undefined);
+    if (!janghoodConfig || !janghoodConfig.lint) {
+      error('Janghood config is not found, please check your config file.');
+      return;
+    }
+    const { lint } = janghoodConfig;
+    if (type === 'install') {
+      await install(lint);
+      return;
+    }
 
-  const janghoodConfig = await initConfig();
-  if (!janghoodConfig || !janghoodConfig.lint) {
-    error('Janghood config is not found, please check your config file.');
-    return;
-  }
-  const { lint } = janghoodConfig;
-  const { argv } = process;
-  if (argv.length < 2) {
     await run(lint);
     return;
-  }
-
-  const type = argv[2];
-  if (type === 'install') {
-    await install(lint);
-    return;
-  }
-
-  await run(lint);
-
-};
-
-jhlint();
+  });
 
 
+cli.help();
 
+cli.parse();
