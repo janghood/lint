@@ -31,6 +31,9 @@ describe('mergeEslintConfig', () => {
         },
         rules: {
           '@janghood/test-rule': 'error'
+        },
+        globals:{
+          test: 'readonly'
         }
       };
       const resultConfig = mergeEslint({ config });
@@ -43,6 +46,7 @@ describe('mergeEslintConfig', () => {
       });
       expect(Object.keys(resultConfig.rules!).length).toBeGreaterThan(1);
       expect(resultConfig.rules!['@janghood/test-rule']).toBe('error');
+      expect(resultConfig.globals).toMatchObject({ test: 'readonly' });
     });
 
     test('overwrite object', () => {

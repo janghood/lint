@@ -31,8 +31,9 @@ export const mergeEslint = (option?: EslintOption, eslintConfig = baseEslintConf
     return eslintConfig;
   }
   const { config, overwrite } = option;
-  const newConfig = Object.assign(config ?? {}, eslintConfig);
+  let newConfig: Linter.Config = {};
   if (config) {
+    newConfig = Object.assign({}, config);
     if (config['env']) {newConfig['env'] = mergeObject('env', config.env);}
     if (config['parserOptions']) {newConfig['parserOptions'] = mergeObject('parserOptions', config.parserOptions);}
     if (config['rules']) {newConfig['rules'] = mergeObject('rules', config.rules);}
@@ -40,6 +41,8 @@ export const mergeEslint = (option?: EslintOption, eslintConfig = baseEslintConf
     if (config['plugins']) {newConfig['plugins'] = mergeArray('plugins', config.plugins);}
     if (config['ignorePatterns']) {newConfig['ignorePatterns'] = mergeArray('ignorePatterns', config.ignorePatterns);}
     if (config.parser) {newConfig.parser = config.parser;}
+  } else {
+    newConfig = Object.assign({}, eslintConfig);
   }
   if (overwrite) {
     Object.assign(newConfig, overwrite);
