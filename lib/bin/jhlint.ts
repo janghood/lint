@@ -6,11 +6,10 @@
  *
  * 江湖的业务千篇一律，复杂的代码好几百行。
  */
-import { initConfig } from '@janghood/config';
 import { run } from './channel/run';
 import { install } from './channel/install';
-import { error } from './dependence/tools';
 import { cac } from 'cac';
+import { initLintConfig } from './cli/initLintConfig';
 
 const cli = cac('jhlint');
 
@@ -19,16 +18,11 @@ cli.command('[type]', 'start lint')
   .action(async (type, options) => {
 
     const { config } = options;
-    const inlineConfig = {};
-    if (config) {
-      // todo get config info
-    }
-    const janghoodConfig = await initConfig(Object.keys(inlineConfig).length > 0 ? inlineConfig : undefined);
-    if (!janghoodConfig || !janghoodConfig.lint) {
-      error('Janghood config is not found, please check your config file.');
-      return;
-    }
-    const { lint } = janghoodConfig;
+    const lintConfig = await initLintConfig(config);
+    if (!lintConfig) {return;}
+    const { lint } = lintConfig;
+
+
     if (type === 'install') {
       await install(lint);
       return;
@@ -40,5 +34,4 @@ cli.command('[type]', 'start lint')
 
 
 cli.help();
-
 cli.parse();
