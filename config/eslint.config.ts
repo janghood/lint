@@ -10,11 +10,11 @@
  */
 import { Linter } from 'eslint';
 
-const eslintConfig: Linter.Config = {
+export default {
   env: {
     browser: true,
     es2021: true,
-    node: true
+    node: true,
   },
   extends: ['eslint:recommended', 'plugin:vue/vue3-essential', 'plugin:@typescript-eslint/recommended'],
   parser: 'vue-eslint-parser',
@@ -22,22 +22,13 @@ const eslintConfig: Linter.Config = {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 'latest',
     sourceType: 'module',
-    ecmaFeatures: { jsx: true }
+    ecmaFeatures: { jsx: true },
   },
-  plugins: ['vue', '@typescript-eslint'],
+  plugins: ['vue', '@typescript-eslint', '@stylistic'],
   ignorePatterns: ['node_modules/*', 'dist', 'coverage'],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-empty-function': [2, { allow: ['arrowFunctions'] }],
-    '@typescript-eslint/ban-types': 'off',
-    '@typescript-eslint/member-delimiter-style': [2, {
-      multiline: { delimiter: 'comma', requireLast: false },
-      singleline: { delimiter: 'comma', requireLast: false }
-    }],
     'vue/multi-word-component-names': 'off',
-    'vue/valid-v-for': 'off'
-  }
-};
+    'vue/valid-v-for': 'off',
+  },
+} as Linter.Config;
 
-export default eslintConfig;

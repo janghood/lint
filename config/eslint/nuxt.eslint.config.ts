@@ -10,7 +10,7 @@
  */
 import { Linter } from 'eslint';
 
-const eslintNuxtConfig: Linter.Config = {
+const nuxtEslintConfig: Linter.Config = {
   extends: ['@nuxtjs/eslint-config-typescript'],
   rules: {
     'vue/html-closing-bracket-spacing': 'off',
@@ -19,4 +19,4 @@ const eslintNuxtConfig: Linter.Config = {
   }
 };
 
-export default eslintNuxtConfig;
+export default nuxtEslintConfig;

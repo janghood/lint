@@ -19,9 +19,6 @@ describe('cli initLintConfig', () => {
         "lint": {
           "commitlint": true,
           "eslint": {
-            "exclude": [
-              "callEslint.ts",
-            ],
             "include": [
               "lib/**/*",
             ],

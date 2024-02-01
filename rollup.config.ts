@@ -12,7 +12,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
 const buildBaseConfig = {
-  plugins: [typescript(), json()]
+  plugins: [typescript(), json()],
 };
 
 
@@ -22,18 +22,18 @@ export default [
     input: 'config/eslint.config.ts',
     output: [{
       sourcemap: true,
-      file: 'dist/eslint.js',
-      format: 'cjs'
-    }]
+      file: 'dist/eslint.cjs',
+      format: 'cjs',
+    }],
   },
   {
     ...buildBaseConfig,
-    input: 'config/eslint.nuxt.config.ts',
+    input: 'config/eslint/eslint.nuxt.config.ts',
     output: [{
       sourcemap: true,
-      file: 'dist/eslint.nuxt.js',
-      format: 'cjs'
-    }]
+      file: 'dist/eslint.nuxt.cjs',
+      format: 'cjs',
+    }],
   },
   {
     ...buildBaseConfig,
@@ -41,22 +41,22 @@ export default [
     output: [{
       sourcemap: true,
       file: 'dist/commitlint.cjs',
-      format: 'cjs'
-    }]
+      format: 'cjs',
+    }],
   },
   {
     input: 'lib/bin/jhlint.ts',
     output: [{
       sourcemap: true,
-      file: 'dist/bin/jhlint.mjs'
+      file: 'dist/bin/jhlint.mjs',
     }],
     external: [
       'eslint', 'chalk', 'husky',
       '@janghood/config',
-      'fs', 'path', 'child_process'
+      'fs', 'path', 'child_process',
     ],
     plugins: [
-      typescript(), json(), nodeResolve(), commonjs()
-    ]
-  }
+      typescript(), json(), nodeResolve(), commonjs({ ignoreDynamicRequires: true }),
+    ],
+  },
 ];

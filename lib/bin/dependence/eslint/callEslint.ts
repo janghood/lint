@@ -12,9 +12,10 @@ import { eslintLog, log, success } from '../tools';
 import { resultsFormatter } from './resultsFormatter';
 import { mergeEslint } from './mergeEslintConfig';
 import { getAutoImports } from './nuxt/getAutoImports';
-import eslintNuxtConfig from '../../../../config/eslint.nuxt.config';
+import nuxtEslintConfig from '../../../../config/eslint/nuxt.eslint.config';
 
 const pwd = process.cwd();
+
 
 export const callEslint = async (config?: EslintOption) => {
 
@@ -30,7 +31,7 @@ export const callEslint = async (config?: EslintOption) => {
       globals[key] = 'readonly';
     });
     baseConfig.globals = Object.assign(baseConfig.globals ?? {}, globals);
-    baseConfig = mergeEslint({ config: eslintNuxtConfig }, baseConfig);
+    baseConfig = mergeEslint({ config: nuxtEslintConfig }, baseConfig);
   }
 
   if (config && config.exclude) {
@@ -48,6 +49,8 @@ export const callEslint = async (config?: EslintOption) => {
 
   let resultMsg = '';
   let pass = 0, fail = 0;
+
+  // todo fix file not found?
 
   lintResults.forEach(result => {
     const filePath = result.filePath.split(pwd)[1];

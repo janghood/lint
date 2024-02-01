@@ -21,7 +21,7 @@ npx --no -- commitlint --edit --config ./node_modules/@janghood/lint/dist/commit
 const dir = '.husky';
 
 const prepare = () => {
-  husky.install(dir);
+  husky(dir);
   if (!p.resolve(process.cwd(), dir).startsWith(process.cwd())) {
     error(`.. not allowed`);
     return;
