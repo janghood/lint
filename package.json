@@ -1,6 +1,6 @@
 {
   "name": "@janghood/lint",
-  "version": "0.0.2-1",
+  "version": "0.0.2",
   "description": "极客江湖lint库",
   "author": "阿怪 <higuaifan@higuaifan.com>",
   "main": "index.js",
@@ -41,9 +41,9 @@
   "license": "MIT",
   "peerDependencies": {
     "@stylistic/eslint-plugin": "^1.5.4",
-    "chalk": "^5.1.2",
-    "eslint": "^8.27.0",
-    "husky": "^8.0.2",
+    "chalk": "^5.3.0",
+    "eslint": "^8.56.0",
+    "husky": "^9.0.7",
     "oxlint": "^0.2.6"
   },
   "devDependencies": {
