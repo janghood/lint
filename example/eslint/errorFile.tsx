@@ -15,8 +15,4 @@ type anyType = any;
 const a = 0 * 2;
 const b = 0 * 2;
 
-// const divs = ()=>{
-//   return ['a','b','c'].map((item)=>{
-//     return <div>{item}</div>
-//   });
-// }
+// const t = <></>

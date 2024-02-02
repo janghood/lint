@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react/jsx-key": "off",
+    "unicorn/no-empty-file": "off",
+    "no-async-promise-executor": "off"
+  }
+}
