@@ -39,7 +39,7 @@ const getSpace = (row: string): string => {
 
 const formatWarningRows = (rows: string[]): string => {
 
-  let logs: string[] = [''];
+  const logs: string[] = [''];
   let i = 0;
   for (i; i < rows.length; i++) {
     let row = rows[i];
@@ -51,13 +51,13 @@ const formatWarningRows = (rows: string[]): string => {
     }
     const trimRow = row.trim();
     if (trimRow.startsWith(':')) {
-      row = row.replaceAll('^|^','─┬─');
+      row = row.replaceAll('^|^', '─┬─');
       if (row.includes('^^')) {
         logs.push(row.replaceAll('^', '─'));
         continue;
       }
-      row = row.replaceAll('^','▲')
-        .replaceAll('`--','╰──');
+      row = row.replaceAll('^', '▲')
+        .replaceAll('`--', '╰──');
     }
     if (row.includes('`---')) {
       // 获取空格长度
@@ -87,7 +87,8 @@ const handlerWarningInfo = (info: string) => {
   let colonIndex = filePathStr.lastIndexOf(':');
   const [preInfo, colWithColon] = splitStringAt(filePathStr, colonIndex);
   colonIndex = preInfo.lastIndexOf(':');
-  let [filePath, rowWithColon] = splitStringAt(preInfo, colonIndex);
+  const [_filePath, rowWithColon] = splitStringAt(preInfo, colonIndex);
+  let filePath = _filePath;
   const col = colWithColon.slice(1);
   const row = rowWithColon.slice(1);
   filePath = filePath.replace('\x1B[1m.', '\x1B[1m');
