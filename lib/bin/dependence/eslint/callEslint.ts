@@ -8,7 +8,7 @@
  */
 import { EslintOption } from '@janghood/config';
 import { ESLint, Linter } from 'eslint';
-import { eslintLog, log, success } from '../tools';
+import { log, success } from '../tools';
 import { resultsFormatter } from './resultsFormatter';
 import { mergeEslint } from './mergeEslintConfig';
 import { getAutoImports } from './nuxt/getAutoImports';
@@ -19,7 +19,6 @@ const pwd = process.cwd();
 
 export const callEslint = async (config?: EslintOption) => {
 
-  eslintLog('====== 👮 eslint start ======');
   let baseConfig: Linter.Config = {};
 
   baseConfig = mergeEslint(config);
@@ -74,5 +73,4 @@ export const callEslint = async (config?: EslintOption) => {
   }
 
 
-  eslintLog('====== 👮 eslint end ======');
 };

@@ -28,10 +28,10 @@ export default [
   },
   {
     ...buildBaseConfig,
-    input: 'config/eslint/eslint.nuxt.config.ts',
+    input: 'config/eslint/nuxt.eslint.config.ts',
     output: [{
       sourcemap: true,
-      file: 'dist/eslint.nuxt.cjs',
+      file: 'dist/nuxt.eslint.cjs',
       format: 'cjs',
     }],
   },

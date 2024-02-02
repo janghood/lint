@@ -1,0 +1,41 @@
+! typescript-eslint(no-non-null-asserted-optional-chain): non-null assertions after an optional chain expression
+    ,-[./lib/components/message/tooltip/MTooltip.tsx:22:1]
+ 22 |     return withPopover<VNode | VNode[]>({
+ 23 |       default: () => slots.default?.()!,
+    :                                   ^   ^
+ 24 |       content: () => withBorder(<div class="m-tooltip-wrapper">{slots.content?.()}</div>),
+    `----
+  help: Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong. You should remove the non-null assertion.
+
+  ! eslint-plugin-react(jsx-key): "key" prop must be placed before any `{...spread}`
+    ,-[./lib/components/template/breadcrumb/MBreadcrumb.tsx:26:1]
+ 26 |         content = props.options.map((option, index: number) => (
+ 27 |           <BreadcrumbItem {...option} key={index} />
+    :                                       ^^^
+ 28 |         ));
+    `----
+  help: To avoid conflicting with React's new JSX transform: https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html
+
+  ! eslint-plugin-unicorn(no-empty-file): Empty files are not allowed.
+   ,-[./lib/components/template/ricePaper/MWCRicePaper.tsx:1:1]
+ 1 | /**
+   : ^
+ 2 |  * @description web component version rice-paper
+   `----
+  help: Delete this file or add some code to it.
+
+  ! eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
+    ,-[./lib/components/message/popover/MPopover.tsx:19:1]
+ 19 |     console.error('MPopover: content is required');
+ 20 |     return () => (<></>);
+    :                   ^^
+ 21 |   }
+    `----
+
+  ! eslint-plugin-react(jsx-no-useless-fragment): Fragments should contain more than one child.
+    ,-[./lib/components/message/popover/MPopover.tsx:24:1]
+ 24 |     console.error('MPopover: trigger is required');
+ 25 |     return () => (<></>);
+    :                   ^^
+ 26 |   }
+    `----

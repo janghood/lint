@@ -21,7 +21,8 @@
     "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "test": "vitest -u",
     "build:eslint": "eslint --config dist/eslint.cjs .",
-    "lint": "jhlint"
+    "lint": "jhlint",
+    "oxlint": "oxlint"
   },
   "bin": {
     "jhlint": "dist/bin/jhlint.mjs"
@@ -41,7 +42,8 @@
   "peerDependencies": {
     "chalk": "^5.1.2",
     "eslint": "^8.27.0",
-    "husky": "^8.0.2"
+    "husky": "^8.0.2",
+    "oxlint": "^0.2.6"
   },
   "devDependencies": {
     "@commitlint/types": "^18.6.0",
@@ -73,8 +75,10 @@
     "cac": "^6.7.14",
     "chalk": "^5.3.0",
     "eslint": "^8.56.0",
+    "eslint-plugin-oxlint": "^0.2.3",
     "eslint-plugin-vue": "^9.21.1",
     "husky": "^9.0.7",
+    "oxlint": "^0.2.6",
     "strip-ansi": "^7.1.0",
     "text-table": "^0.2.0"
   }

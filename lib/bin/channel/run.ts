@@ -10,12 +10,18 @@
  */
 import { LintType } from '@janghood/config';
 import { callEslint } from '../dependence/eslint/callEslint';
+import { callOxlint } from '../dependence/oxlint/callOxlint';
+import { eslintLog } from '../dependence/tools';
 
 
 export const run = async (lint: LintType) => {
 
   if (lint.eslint) {
+    eslintLog('====== 👮 eslint start ======');
+    const oxlintRes = await callOxlint()
     await callEslint(lint.eslint);
+    console.log(oxlintRes);
+    eslintLog('====== 👮 eslint end ======');
   }
 
 };
