@@ -17,7 +17,7 @@ So when you use `@janghood/lint`:
 pnpm install --shamefully-hoist
 ```
 
-#### Eslint
+#### Lint
 
 ```typescript
 // janghood.config.ts
@@ -30,6 +30,10 @@ export default defineJhConfig({
   }
 })
 ```
+
+##### TODO
+
+* [ ] `oxlint` config support
 
 #### Commitlint
 
