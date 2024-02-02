@@ -18,7 +18,7 @@
     "run-help": "tsx lib/bin/jhlint.ts --help",
     "dist-dev": "npm run build && node dist/bin/jhlint.mjs install",
     "rm-dist": "rm -rf dist",
-    "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && tsx ./cli/bin",
     "test": "vitest -u",
     "build:eslint": "eslint --config dist/eslint.cjs .",
     "lint": "jhlint",
@@ -40,6 +40,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
+    "@stylistic/eslint-plugin": "^1.5.4",
     "chalk": "^5.1.2",
     "eslint": "^8.27.0",
     "husky": "^8.0.2",
