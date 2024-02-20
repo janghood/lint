@@ -43,6 +43,8 @@
     "@stylistic/eslint-plugin": "^1.5.4",
     "chalk": "^5.3.0",
     "eslint": "^8.56.0",
+    "eslint-plugin-oxlint": "^0.2.3",
+    "eslint-plugin-vue": "^9.21.1",
     "husky": "^9.0.7",
     "oxlint": "^0.2.6"
   },
@@ -60,6 +62,8 @@
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.11.15",
     "@types/text-table": "^0.2.5",
+    "@typescript-eslint/utils": "^6.21.0",
+    "@janghood/eslint-plugin": "workspace:*",
     "rollup": "^4.9.6",
     "tslib": "^2.6.2",
     "tsx": "^4.7.0",
