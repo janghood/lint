@@ -1,6 +1,6 @@
 {
   "name": "@janghood/lint",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "极客江湖lint库",
   "author": "阿怪 <higuaifan@higuaifan.com>",
   "main": "index.js",
