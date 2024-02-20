@@ -131,7 +131,7 @@ export const warningHandler = (log: string) => {
 
 
     if (!matchArr || matchArr.length === 0) return '';
-    const block: Array<{ rule: [string, string], info: string }> = [{ rule: splitRule(matchArr[0]), info: '' }];
+    const block: Array<{ rule: [string, string]; info: string }> = [{ rule: splitRule(matchArr[0]), info: '' }];
     log = removeRule(log, matchArr[0].length);
 
     matchArr.forEach((rule, i) => {

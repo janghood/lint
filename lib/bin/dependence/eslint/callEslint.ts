@@ -26,7 +26,7 @@ export const callEslint = async (config?: EslintOption) => {
   if (config && config.nuxt) {
     const globalsKeys = getAutoImports();
     const globals: Record<string, 'readonly'> = {};
-    globalsKeys.forEach((key) => {
+    globalsKeys.forEach(key => {
       globals[key] = 'readonly';
     });
     baseConfig.globals = Object.assign(baseConfig.globals ?? {}, globals);
@@ -38,7 +38,7 @@ export const callEslint = async (config?: EslintOption) => {
       baseConfig.ignorePatterns.push(...config.exclude);
     }
     if (baseConfig.ignorePatterns) {
-      baseConfig.ignorePatterns = [(baseConfig.ignorePatterns as string), ...config.exclude];
+      baseConfig.ignorePatterns = [baseConfig.ignorePatterns as string, ...config.exclude];
     }
     baseConfig.ignorePatterns = config.exclude;
   }

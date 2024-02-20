@@ -30,21 +30,21 @@ export const resultsFormatter = (result: ESLint.LintResult) => {
         message.column || 0,
         messageType,
         message.message.replace(/([^ ])\.$/u, '$1'),
-        c.dim(message.ruleId || '')
+        c.dim(message.ruleId || ''),
       ];
     }),
     {
       align: [null, 'r', 'l'],
       stringLength(str) {
         return stripAnsi(str).length;
-      }
-    }
+      },
+    },
   ).split('\n')
     .map(el => el.replace(
         /(\d+)\s+(\d+)/u,
         // todo ?? why eslint can print number and have clickable link?
-        (m, p1, p2) => c.dim(`${result.filePath.split(pwd)[1]}:${p1}:${p2}`)
-      )
+        (m, p1, p2) => c.dim(`${result.filePath.split(pwd)[1]}:${p1}:${p2}`),
+      ),
     )
     .join('\n')
   }`;

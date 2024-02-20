@@ -18,7 +18,7 @@ export const run = async (lint: LintType) => {
 
   if (lint.eslint) {
     eslintLog('====== 👮 eslint start ======');
-    const oxlintRes = await callOxlint()
+    const oxlintRes = await callOxlint();
     await callEslint(lint.eslint);
     console.log(oxlintRes);
     eslintLog('====== 👮 eslint end ======');

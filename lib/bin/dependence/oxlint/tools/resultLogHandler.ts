@@ -36,7 +36,7 @@ export const resultLogHandler = (log: string) => {
   // 判断是否有换行
   if (log.includes('\n')) {
     // Found日志
-    const foundLogMatch = log.split('\n').filter((item) => item.includes('Found'));
+    const foundLogMatch = log.split('\n').filter(item => item.includes('Found'));
     if (foundLogMatch.length > 0) {
       const foundLogStr = foundLogMatch[0];
       const foundChars = foundLogStr.split(' ');

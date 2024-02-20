@@ -8,7 +8,8 @@
  */
 
 const unusedValue = 'hi';
-const q = (slots: any) => slots.default?.()!;
+const q = (slots:any) => slots.default?.()!;
+let foo : string = "bar";
 
 type anyType = any;
 
@@ -16,3 +17,5 @@ const a = 0 * 2;
 const b = 0 * 2;
 
 // const t = <></>
+
+

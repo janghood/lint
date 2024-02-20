@@ -32,7 +32,7 @@ export const callOxlint = () => {
     const { stdout, stderr } = exec(command);
     let log = '';
     if (stdout) {
-      stdout.on('data', (output) => {
+      stdout.on('data', output => {
         log += output;
       });
       stdout.on('end', () => {
@@ -41,7 +41,7 @@ export const callOxlint = () => {
       });
     }
     if (stderr) {
-      stderr.on('data', (data) => {
+      stderr.on('data', data => {
         reject(`oxlint error:${data}`);
       });
     }

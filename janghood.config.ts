@@ -11,7 +11,10 @@ import { defineJhConfig } from '@janghood/config';
 
 export default defineJhConfig({
   base: {
-    include: ['lib/**/*']
+    include: [
+      'lib/**/*',
+      'example/**/*'
+    ],
   },
   lint: {
     eslint: true,
