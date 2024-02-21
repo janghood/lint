@@ -19,7 +19,8 @@
     "dist-dev": "npm run build && node dist/bin/jhlint.mjs install",
     "rm-dist": "rm -rf dist",
     "build": "npm run rm-dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && tsx ./cli/bin",
-    "test": "vitest -u",
+    "test": "vitest",
+    "test:update": "vitest -u",
     "build:eslint": "eslint --config dist/eslint.cjs .",
     "lint": "jhlint",
     "oxlint": "oxlint"

@@ -21,7 +21,7 @@ describe('oxlintLogTools', () => {
 
   test('success', () => {
     const res = handleOxlintLog(successOutput);
-    const resList = res.split('\x1B[38;2');
+    const resList = res.log.split('\x1B[38;2');
     expect(resList[1]).include('⚡️ oxlint Finished in ');
     expect(resList[2]).include('11ms');
     expect(resList[3]).include('on');

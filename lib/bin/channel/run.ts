@@ -19,9 +19,11 @@ export const run = async (lint: LintType) => {
   if (lint.eslint) {
     eslintLog('====== 👮 eslint start ======');
     const oxlintRes = await callOxlint();
-    await callEslint(lint.eslint);
-    console.log(oxlintRes);
+    const eslintRes = await callEslint(lint.eslint);
+    console.log(oxlintRes.log);
     eslintLog('====== 👮 eslint end ======');
+
+    process.exit(oxlintRes.exit || eslintRes);
   }
 
 };

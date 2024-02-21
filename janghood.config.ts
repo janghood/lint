@@ -13,11 +13,11 @@ export default defineJhConfig({
   base: {
     include: [
       'lib/**/*',
-      'example/**/*'
+      'example/**/*',
     ],
   },
   lint: {
     eslint: true,
-    commitlint: true
-  }
+    commitlint: true,
+  },
 });

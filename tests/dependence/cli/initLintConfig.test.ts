@@ -21,6 +21,7 @@ describe('cli initLintConfig', () => {
           "eslint": {
             "include": [
               "lib/**/*",
+              "example/**/*",
             ],
           },
         },

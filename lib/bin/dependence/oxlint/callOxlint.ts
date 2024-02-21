@@ -13,7 +13,7 @@ import fs from 'fs';
 
 export const callOxlint = () => {
   // todo update config and support overwrite .eslintrc.json path
-  return new Promise<string>((resolve, reject) => {
+  return new Promise<OxlintLogRes>((resolve, reject) => {
     let config = '';
     const nodeModulesPath = path.resolve('./node_modules/@janghood/lint/config/oxlint/.eslintrc.json');
     // check file exist
@@ -24,7 +24,6 @@ export const callOxlint = () => {
 
     // for dev debug
     // config = `-c ./config/oxlint/.eslintrc.json`;
-
 
 
     const command = `oxlint . ${config}`;
@@ -42,7 +41,7 @@ export const callOxlint = () => {
     }
     if (stderr) {
       stderr.on('data', data => {
-        reject(`oxlint error:${data}`);
+        reject({ log: `oxlint error:${data}`, exit: 1 });
       });
     }
   });

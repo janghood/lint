@@ -46,7 +46,7 @@ const formatWarningRows = (rows: string[]): string => {
     if (row.startsWith('Finished')) {
       // 整合剩下的row
       const result = rows.slice(i, rows.length).join('\n');
-      logs.push(resultLogHandler(result));
+      logs.push(resultLogHandler(result).log);
       continue;
     }
     const trimRow = row.trim();
@@ -112,7 +112,7 @@ const ASCIIMatch = (log: string): string[] => {
   return match;
 };
 
-export const warningHandler = (log: string) => {
+export const warningHandler = (log: string): OxlintLogRes => {
   try {
     // ESC [ 3 3 m
 
@@ -130,7 +130,7 @@ export const warningHandler = (log: string) => {
     }
 
 
-    if (!matchArr || matchArr.length === 0) return '';
+    if (!matchArr || matchArr.length === 0) return { log: '', exit: 0 };
     const block: Array<{ rule: [string, string]; info: string }> = [{ rule: splitRule(matchArr[0]), info: '' }];
     log = removeRule(log, matchArr[0].length);
 
@@ -153,7 +153,10 @@ export const warningHandler = (log: string) => {
     });
 
 
-    return result;
+    return {
+      log: result,
+      exit: 1,
+    };
   } catch (e) {
     console.error('split error', e);
   }
@@ -162,5 +165,5 @@ export const warningHandler = (log: string) => {
   // 使用匹配结果来切分文本
 
 
-  return '';
+  return { log: '', exit: 0 };
 };

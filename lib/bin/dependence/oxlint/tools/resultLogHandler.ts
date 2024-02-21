@@ -24,7 +24,7 @@ const foundLog = (warnings: string, errors: string) => {
 };
 
 
-export const resultLogHandler = (log: string) => {
+export const resultLogHandler = (log: string): OxlintLogRes => {
   let output = '';
   const data = /Finished in \d+ms on \d+ files with \d+ rules using \d+ threads./g.exec(log)?.[0] ?? log;
   const chars = data.split(' ');
@@ -33,6 +33,8 @@ export const resultLogHandler = (log: string) => {
   const rules = chars[7];
   const threads = chars[10];
   output += oxlintLog(time, files, rules, threads);
+  let warnings = '0';
+  let errors = '0';
   // 判断是否有换行
   if (log.includes('\n')) {
     // Found日志
@@ -40,10 +42,13 @@ export const resultLogHandler = (log: string) => {
     if (foundLogMatch.length > 0) {
       const foundLogStr = foundLogMatch[0];
       const foundChars = foundLogStr.split(' ');
-      const warnings = foundChars[1];
-      const errors = foundChars[4];
+      warnings = foundChars[1];
+      errors = foundChars[4];
       output += '\n' + foundLog(warnings, errors);
     }
   }
-  return output;
+  return {
+    log: output,
+    exit: Number(warnings) + Number(errors) > 0 ? 1 : 0,
+  };
 };

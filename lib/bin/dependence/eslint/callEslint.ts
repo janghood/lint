@@ -72,5 +72,5 @@ export const callEslint = async (config?: EslintOption) => {
     log(`🚨 eslint pass ${pass} file(s), fail ${fail} file(s)`);
   }
 
-
+  return fail;
 };

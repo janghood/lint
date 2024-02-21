@@ -9,8 +9,7 @@
 import { warningHandler } from './warningLogTools';
 import { resultLogHandler } from './resultLogHandler';
 
-
-export const handleOxlintLog = (output: string) => {
+export const handleOxlintLog = (output: string): OxlintLogRes => {
 
   output = output.trim();
   if (output.startsWith('Finished')) {
@@ -18,5 +17,8 @@ export const handleOxlintLog = (output: string) => {
   } else if (output[0].charCodeAt(0) === 27 || output.startsWith('!')) {
     return warningHandler(output);
   }
-  return '-------\n' + output + '\n\n';
+  return {
+    log: '-------\n' + output + '\n\n',
+    exit: 1,
+  };
 };
