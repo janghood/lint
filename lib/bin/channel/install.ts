@@ -18,6 +18,12 @@ const commitMsg = `#!/usr/bin/env sh
 npx --no -- commitlint --edit --config ./node_modules/@janghood/lint/dist/commitlint.cjs
 `;
 
+const prePushMsg = `#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run lint
+`;
+
 const dir = '.husky';
 
 const prepare = () => {
@@ -41,7 +47,10 @@ export const install = async (lint: LintType) => {
 
   try {
     fs.writeFileSync(p.join(dir, 'commit-msg'), commitMsg);
+    fs.writeFileSync(p.join(dir, 'pre-push'), prePushMsg);
+
     fs.chmodSync(p.join(dir, 'commit-msg'), 0o755);
+    fs.chmodSync(p.join(dir, 'pre-push'), 0o755);
   } catch (e) {
     error('install failed');
     throw e;
