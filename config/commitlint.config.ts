@@ -8,6 +8,8 @@
  */
 import type { UserConfig } from '@commitlint/types';
 
+const ignoreBucket = Boolean(process.env.SKIP_BUCKET);
+
 const test = (regex: RegExp, value: string) => regex.test(value);
 
 const Configuration: UserConfig = {
@@ -19,7 +21,7 @@ const Configuration: UserConfig = {
     'janghood-first-emoji': [2, 'always'],
     'janghood-space': [2, 'always'],
     'janghood-square-bracket': [2, 'always'],
-    'janghood-main-message': [2, 'always']
+    'janghood-main-message': [2, 'always'],
   },
   plugins: [
     {
@@ -29,30 +31,34 @@ const Configuration: UserConfig = {
         },
         'janghood-first-emoji': ({ header }) => {
           return [
-            test(/\p{Emoji_Presentation}/gu, header), '提交首位必须是emoji。 commit message first char must be emoji.'
+            test(/\p{Emoji}/gu, header), '提交首位必须是emoji。 commit message first char must be emoji.',
           ];
         },
         'janghood-space': ({ header }) => {
           return [
-            test(/\p{Emoji_Presentation} /gu, header),
-            '提交emoji后必须跟空格。 commit message must have whitespace after emoji.'
+            test(/\p{Emoji} /gu, header),
+            '提交emoji后必须跟空格。 commit message must have whitespace after emoji.',
           ];
         },
         'janghood-square-bracket': ({ header }) => {
+          if(ignoreBucket) return [true];
+
           return [
-            test(/\p{Emoji_Presentation} \[[^\]]+\]/gu, header),
-            'emoji空格后必须跟随commit分类。 commit message must have commit type after emoji+whitespace.'
+            test(/\p{Emoji} \[[^\]]+\]/gu, header),
+            'emoji空格后必须跟随commit分类。 commit message must have commit type after emoji+whitespace.',
           ];
         },
         'janghood-main-message': ({ header }) => {
+          const regex = ignoreBucket? /\p{Emoji} (.)+/gu:/\p{Emoji} \[[^\]]+\](.)+/gu;
+
           return [
-            test(/\p{Emoji_Presentation} \[[^\]]+\](.)+/gu, header),
-            '提交信息必须有主体信息。 commit message must have main message.'
+            test(regex, header),
+            '提交信息必须有主体信息。 commit message must have main message.',
           ];
-        }
-      }
-    }
-  ]
+        },
+      },
+    },
+  ],
 };
 
 export default Configuration;
