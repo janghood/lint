@@ -47,11 +47,24 @@ In `package.json`:
 }
 ```
 
+this script will automatically create `husky`'s `commit-msg` and `pre-push` git hooks.
+and you should provide your own lint script:
+
+```json
+{
+  "scripts": {
+    "lint": "jhlint"
+  }
+}
+```
+
 run prepare:
 
 ```bash
 pnpm run prepare
 ```
+
+and set your own `commitlint` config:
 
 ```typescript
 // janghood.config.ts
