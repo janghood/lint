@@ -7,10 +7,13 @@
  * 江湖的业务千篇一律，复杂的代码好几百行。
  */
 import type { UserConfig } from '@commitlint/types';
+import emojiRegex from 'emoji-regex';
 
 const ignoreBucket = Boolean(process.env.SKIP_BUCKET);
 
-const test = (regex: RegExp, value: string) => regex.test(value);
+const er = emojiRegex();
+
+const test = (pattern: RegExp | string, value: string) => new RegExp(pattern).test(value);
 
 const Configuration: UserConfig = {
   extends: ['@commitlint/config-conventional'],
@@ -31,25 +34,25 @@ const Configuration: UserConfig = {
         },
         'janghood-first-emoji': ({ header }) => {
           return [
-            test(/\p{Emoji}/gu, header), '提交首位必须是emoji。 commit message first char must be emoji.',
+            test(`^(${er})`, header), '提交首位必须是emoji。 commit message first char must be emoji.',
           ];
         },
         'janghood-space': ({ header }) => {
           return [
-            test(/\p{Emoji} /gu, header),
+            test(`^(${er}) `, header),
             '提交emoji后必须跟空格。 commit message must have whitespace after emoji.',
           ];
         },
         'janghood-square-bracket': ({ header }) => {
-          if(ignoreBucket) return [true];
+          if (ignoreBucket) return [true];
 
           return [
-            test(/\p{Emoji} \[[^\]]+\]/gu, header),
+            test(`^(${er}) \\[[^\\]]+\\]`, header),
             'emoji空格后必须跟随commit分类。 commit message must have commit type after emoji+whitespace.',
           ];
         },
         'janghood-main-message': ({ header }) => {
-          const regex = ignoreBucket? /\p{Emoji} (.)+/gu:/\p{Emoji} \[[^\]]+\](.)+/gu;
+          const regex = ignoreBucket ? `^(${er}) (.)+` : `^(${er}) \\[[^\\]]+\\] (.)+`;
 
           return [
             test(regex, header),
