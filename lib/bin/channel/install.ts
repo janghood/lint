@@ -11,6 +11,7 @@ import husky from 'husky';
 import p from 'path';
 import fs from 'fs';
 import { error, log, success } from '../dependence/tools';
+import { isAddCommitMsg } from './install/isAddCommitMsg';
 
 const commitMsg = `#!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
@@ -40,17 +41,25 @@ const prepare = () => {
   return true;
 };
 
+
+const writeFile = (path: string, content: string) => {
+  fs.writeFileSync(p.join(dir, path), content);
+  fs.chmodSync(p.join(dir, path), 0o755);
+};
+
 export const install = async (lint: LintType) => {
+  const commitMsgAdd = await isAddCommitMsg();
+
+
   log('installing commitlint git hook...');
   if (!lint.commitlint) {return;}
   if (!prepare()) {return;}
 
   try {
-    fs.writeFileSync(p.join(dir, 'commit-msg'), commitMsg);
-    fs.writeFileSync(p.join(dir, 'pre-push'), prePushMsg);
-
-    fs.chmodSync(p.join(dir, 'commit-msg'), 0o755);
-    fs.chmodSync(p.join(dir, 'pre-push'), 0o755);
+    if (commitMsgAdd) {
+      writeFile('commit-msg', commitMsg);
+    }
+    writeFile('pre-push', prePushMsg);
   } catch (e) {
     error('install failed');
     throw e;
