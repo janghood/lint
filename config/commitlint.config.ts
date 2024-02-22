@@ -24,6 +24,7 @@ const Configuration: UserConfig = {
     'janghood-first-emoji': [2, 'always'],
     'janghood-space': [2, 'always'],
     'janghood-square-bracket': [2, 'always'],
+    'janghood-square-bracket-space': [2, 'always'],
     'janghood-main-message': [2, 'always'],
   },
   plugins: [
@@ -50,6 +51,14 @@ const Configuration: UserConfig = {
             test(`^(${er}) \\[[^\\]]+\\]`, header),
             'emoji空格后必须跟随commit分类。 commit message must have commit type after emoji+whitespace.',
           ];
+        },
+        'janghood-square-bracket-space': ({ header }) => {
+          if (ignoreBucket) return [true];
+
+          return [
+            test(`^(${er}) \\[[^\\]]+\\] `,header),
+            '提交信息commit分类后必须跟空格。 commit message must have whitespace after commit type.'
+          ]
         },
         'janghood-main-message': ({ header }) => {
           const regex = ignoreBucket ? `^(${er}) (.)+` : `^(${er}) \\[[^\\]]+\\] (.)+`;
