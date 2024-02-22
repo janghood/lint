@@ -74,3 +74,11 @@ export default defineJhConfig({
   }
 })
 ```
+
+##### SKIP_BUCKET
+
+change `.husky/commit-msg`, add `SKIP_BUCKET=true` before `npx`:
+
+```bash
+SKIP_BUCKET=true npx ...
+```
