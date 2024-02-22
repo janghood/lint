@@ -47,9 +47,13 @@ const writeFile = (path: string, content: string) => {
   fs.chmodSync(p.join(dir, path), 0o755);
 };
 
-export const install = async (lint: LintType) => {
-  const commitMsgAdd = await isAddCommitMsg();
+export const install = async (lint: LintType, options: { update: boolean, project: boolean }) => {
+  // check .husky
+  if (fs.existsSync(dir) && !options.update) {
+    return;
+  }
 
+  const commitMsgAdd = await isAddCommitMsg(options.project);
 
   log('installing commitlint git hook...');
   if (!lint.commitlint) {return;}

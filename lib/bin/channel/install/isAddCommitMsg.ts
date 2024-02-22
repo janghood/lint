@@ -26,18 +26,22 @@ enum EN {
 const LANG = locale.includes('zh') ? ZH : EN;
 
 
-export const isAddCommitMsg = async () => {
-  const res = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'commit',
-      default: LANG.PROJECT,
-      message: LANG.MSG,
-      choices: [
-        LANG.PROJECT,
-        LANG.CUSTOM,
-      ],
-    },
-  ]);
-  return res.commit === LANG.PROJECT;
+export const isAddCommitMsg = async (commitlint: boolean) => {
+  if (process.stdout.isTTY) {
+    const res = await inquirer.prompt([
+      {
+        type: 'list',
+        name: 'commit',
+        default: LANG.PROJECT,
+        message: LANG.MSG,
+        choices: [
+          LANG.PROJECT,
+          LANG.CUSTOM,
+        ],
+      },
+    ]);
+    return res.commit === LANG.PROJECT;
+  } else {
+    return commitlint; // true means LANG.PROJECT
+  }
 };

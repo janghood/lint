@@ -13,23 +13,31 @@ import { initLintConfig } from './cli/initLintConfig';
 
 const cli = cac('jhlint');
 
-cli.command('[type]', 'start lint')
+const getLint = async (options: any) => {
+  const { config } = options;
+  const lintConfig = await initLintConfig(config);
+  if (!lintConfig) {return;}
+  const { lint } = lintConfig;
+  return lint;
+};
+
+cli.command('', 'start lint')
   .option('--config, -c <path>', 'config file path')
-  .action(async (type, options) => {
-
-    const { config } = options;
-    const lintConfig = await initLintConfig(config);
-    if (!lintConfig) {return;}
-    const { lint } = lintConfig;
-
-
-    if (type === 'install') {
-      await install(lint);
-      return;
-    }
-
+  .action(async options => {
+    const lint = await getLint(options);
+    if (!lint) {return;}
     await run(lint);
     return;
+  });
+
+cli.command('install', 'install lint hook')
+  .option('--config, -c <path>', 'config file path')
+  .option('--update, -u', 'update install')
+  .option('--project, -p', 'use project type commitlint')
+  .action(async options => {
+    const lint = await getLint(options);
+    if (!lint) {return;}
+    await install(lint, options);
   });
 
 
