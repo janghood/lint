@@ -27,7 +27,7 @@ const LANG = locale.includes('zh') ? ZH : EN;
 
 
 export const isAddCommitMsg = async (commitlint: boolean) => {
-  if (process.stdout.isTTY) {
+  if (process.stdout.isTTY && !process.env.CI) {
     const res = await inquirer.prompt([
       {
         type: 'list',
